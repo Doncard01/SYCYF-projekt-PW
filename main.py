@@ -46,8 +46,9 @@ sent = np.array(sent, dtype=float)
 korA = sig.correlate(pointA, sent)
 korB = sig.correlate(pointB, sent)
 
-maxA = np.argmax(korA)
-maxB = np.argmax(korB)
+#od znalezionej wartości odejmujemy czas nadawania naszego sygnału
+maxA = np.argmax(korA)-(len(sent)-1)
+maxB = np.argmax(korB)-(len(sent)-1)
 
 print(f"Korelacja dla A: {maxA} próbka \nKorelacja dla B: {maxB} próbka\n")
 
