@@ -61,12 +61,12 @@ filtered2 = scipy.signal.filtfilt(d, c, data3)
 # wykresy
 plt.figure(figsize=(10, 4))
 
-plt.subplot(121)
+plt.subplot(122)
 plt.plot(times2, data2)
 plt.title("Sygnał X")
 plt.margins(0, .05)
 
-plt.subplot(122)
+plt.subplot(121)
 plt.plot(times, filtered)
 plt.title("Przefiltrowany sygnał A")
 plt.margins(0, .05)
