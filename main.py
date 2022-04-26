@@ -1,6 +1,5 @@
 import numpy as np
 import scipy.signal as sig
-
 tabA = []
 tabB = []
 sent = []
@@ -53,9 +52,11 @@ maxB = np.argmax(korB)-(len(sent)-1)
 print(f"Korelacja dla A: {maxA} próbka \nKorelacja dla B: {maxB} próbka\n")
 
 
-c = 300000
+c = 299792.458
 #oba promienie dzielone na 2, ponieważ sygnał musiał w tym czasie pokonać drogę do drona i z powrotem
-promienA = (maxA*10**(-6)*c)/2
-promienB = (maxB*10**(-6)*c)/2
+promienA = round(((maxA*10**(-6)*c)/2),2)
+promienB = round(((maxB*10**(-6)*c)/2),2)
 print(f"Promień dla A: {promienA}km")
 print(f"Promień dla B: {promienB}km")
+
+
