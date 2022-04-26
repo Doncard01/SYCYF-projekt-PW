@@ -1,7 +1,5 @@
 import numpy as np
 import scipy.signal as sig
-import matplotlib.pyplot as plt
-import scipy.io.wavfile
 
 tabA = []
 tabB = []
@@ -35,45 +33,25 @@ for i in range(2):
     tabB.pop(len(tabB)-1)
     sent.pop(len(sent)-1)
 
-pointA = np.array(tabA)
-pointB = np.array(tabB)
+pointA = np.array(tabA, dtype=float)
+pointB = np.array(tabB, dtype=float)
+sent = np.array(sent, dtype=float)
 
 # print(pointA)
 # print(pointB)
 # print(sent)
 
-# odczyt sygnału z pliku .wav
-sampleRate, data = scipy.io.wavfile.read('PointA.wav')
-times = np.arange(len(data))/sampleRate
 
-sampleRate2, data2 = scipy.io.wavfile.read('x_signal8.wav')
-times2 = np.arange(len(data2))/sampleRate2
+#korelacja
+korA = sig.correlate(sent, pointA)
+korB = sig.correlate(sent, pointB)
 
-sampleRate3, data3 = scipy.io.wavfile.read('PointB.wav')
-times3 = np.arange(len(data3))/sampleRate3
+maxA = np.argmax(korA)
+maxB = np.argmax(korB)
 
-# użycie filtra dolnopasmowego z 0.005 częstotliwości Nyquista
-b, a = scipy.signal.butter(3, [0.01, 0.005], 'band') #scipy.signal.butter(3, 0.01, 'lowpass')
-filtered = scipy.signal.filtfilt(b, a, data)
+print(f"Korelacja dla A: {maxA}, \nKorelacja dla B: {maxB}")
 
-d, c = scipy.signal.butter(3, [0.01, 0.005], 'band') #test dla 'band'
-filtered2 = scipy.signal.filtfilt(d, c, data3)
-# wykresy
-plt.figure(figsize=(10, 4))
+roznica = maxA - maxB
+print(f"Różnica dla @korA i @korB: {roznica}")
 
-plt.subplot(122)
-plt.plot(times2, data2)
-plt.title("Sygnał X")
-plt.margins(0, .05)
 
-plt.subplot(121)
-plt.plot(times, filtered)
-plt.title("Przefiltrowany sygnał A")
-plt.margins(0, .05)
-
-plt.subplot(133)
-plt.plot(times3, filtered2)
-plt.title("Przefiltrowany sygnał B")
-plt.margins(0, .05)
-
-plt.show()
