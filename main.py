@@ -43,15 +43,18 @@ sent = np.array(sent, dtype=float)
 
 
 #korelacja
-korA = sig.correlate(sent, pointA)
-korB = sig.correlate(sent, pointB)
+korA = sig.correlate(pointA, sent)
+korB = sig.correlate(pointB, sent)
 
 maxA = np.argmax(korA)
 maxB = np.argmax(korB)
 
 print(f"Korelacja dla A: {maxA}, \nKorelacja dla B: {maxB}")
 
-roznica = maxA - maxB
+roznica = maxB - maxA
 print(f"Różnica dla @korA i @korB: {roznica}")
 
+c = 300000
 
+promien = roznica*10**(-6)*c
+print(f"Promień dla obu punktów: {promien}")
