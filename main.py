@@ -53,10 +53,10 @@ sampleRate3, data3 = scipy.io.wavfile.read('PointB.wav')
 times3 = np.arange(len(data3))/sampleRate3
 
 # użycie filtra dolnopasmowego z 0.005 częstotliwości Nyquista
-b, a = scipy.signal.butter(3, 0.01, 'lowpass')
+b, a = scipy.signal.butter(3, [0.01, 0.005], 'band') #scipy.signal.butter(3, 0.01, 'lowpass')
 filtered = scipy.signal.filtfilt(b, a, data)
 
-d, c = scipy.signal.butter(2, [0.01, 0.005], 'band') #test dla 'band'
+d, c = scipy.signal.butter(3, [0.01, 0.005], 'band') #test dla 'band'
 filtered2 = scipy.signal.filtfilt(d, c, data3)
 # wykresy
 plt.figure(figsize=(10, 4))
