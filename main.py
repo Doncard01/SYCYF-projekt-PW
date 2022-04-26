@@ -49,12 +49,12 @@ korB = sig.correlate(pointB, sent)
 maxA = np.argmax(korA)
 maxB = np.argmax(korB)
 
-print(f"Korelacja dla A: {maxA}, \nKorelacja dla B: {maxB}")
+print(f"Korelacja dla A: {maxA} próbka \nKorelacja dla B: {maxB} próbka\n")
 
-roznica = maxB - maxA
-print(f"Różnica dla @korA i @korB: {roznica}")
 
 c = 300000
-
-promien = roznica*10**(-6)*c
-print(f"Promień dla obu punktów: {promien}")
+#oba promienie dzielone na 2, ponieważ sygnał musiał w tym czasie pokonać drogę do drona i z powrotem
+promienA = (maxA*10**(-6)*c)/2
+promienB = (maxB*10**(-6)*c)/2
+print(f"Promień dla A: {promienA}km")
+print(f"Promień dla B: {promienB}km")
