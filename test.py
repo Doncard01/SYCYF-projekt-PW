@@ -66,7 +66,6 @@ if __name__ == '__main__':
     #     pointAD = np.delete(pointAD,4980)
 
     #plt.plot(x_coordinate, wynikAgit)
-
     plt.plot(x_coordinate, wynikBgit)
     # plt.plot(x_coordinate, pointAD)
     plt.show()
