@@ -60,14 +60,14 @@ if __name__ == '__main__':
 
 
     x_coordinate = [1 * i for i in range(len(wynikAgit))]
-    plt.axis([1630, 1670, 0.2, 0.9])
-    # pointAD=pointB
-    # for i in range(20):
-    #     pointAD = np.delete(pointAD,4980)
+    plt.axis([1630, 1670, -0.9, 0.9])
+    pointAD=pointB
+    for i in range(20):
+        pointAD = np.delete(pointAD,4980)
 
     #plt.plot(x_coordinate, wynikAgit)
     plt.plot(x_coordinate, wynikBgit)
-    # plt.plot(x_coordinate, pointAD)
+    plt.plot(x_coordinate, pointAD)
     plt.show()
 
 
