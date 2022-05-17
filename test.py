@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.signal as sig
+import matplotlib.pyplot as plt
 
 tabA = []
 tabB = []
@@ -36,22 +36,39 @@ for i in range(2):
 pointA = np.array(tabA, dtype=float)
 pointB = np.array(tabB, dtype=float)
 sent1 = np.array(sent, dtype=float)
-wynikiA = []
-
-suma=0.0
-for i in range(len(pointA)-20):
-    wynikiA.append(suma)
-    suma = 0.0
-    for j in range(len(sent1)):
-        if pointA[i + j] > sent1[j]:
-            suma = suma + pointA[i + j] - sent1[j]
-
-        else:
-            suma = suma + sent1[j] - pointA[i + j]
 
 
-wynikAgit = np.array(wynikiA, dtype=float)
-wynikAgit = np.delete(wynikAgit,0)
-maxA = np.argmin(wynikAgit)
+def metodaRoznicy(wzor, pacjent):
+    wynikiA = []
+    for i in range(len(pacjent) - 20):
 
-print(maxA)
+        suma = 0.0
+        for j in range(len(wzor)):
+            suma = suma + abs(pacjent[i + j] - wzor[j])
+        wynikiA.append(suma / 20)
+    return wynikiA
+
+if __name__ == '__main__':
+    temp1 = metodaRoznicy(sent1, pointA)
+    wynikAgit = np.array(temp1, dtype=float)
+    minA = np.argmin(wynikAgit)
+    print(minA)
+    temp2 = metodaRoznicy(sent1, pointB)
+    wynikBgit = np.array(temp2, dtype=float)
+    minB = np.argmin(wynikBgit)
+    print(minB)
+
+
+    x_coordinate = [1 * i for i in range(len(wynikAgit))]
+    plt.axis([1630, 1670, 0.2, 0.9])
+    # pointAD=pointB
+    # for i in range(20):
+    #     pointAD = np.delete(pointAD,4980)
+
+    #plt.plot(x_coordinate, wynikAgit)
+
+    plt.plot(x_coordinate, wynikBgit)
+    # plt.plot(x_coordinate, pointAD)
+    plt.show()
+
+
